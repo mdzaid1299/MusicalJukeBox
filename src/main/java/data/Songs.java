@@ -8,13 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Songs {
+
     private int songId;
     private String songsName;
     private String artist;
     private String duration;
     private String genre;
     private String filepath;
-
     public Songs() {
     }
 

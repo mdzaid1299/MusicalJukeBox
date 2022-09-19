@@ -32,17 +32,17 @@ public class Play {
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
 
-            String response = "";
+            String res = "";
 
-            while (!response.equals("Q")) {
+            while (!res.equals("Q")) {
                 System.out.println("P = play, T= Pause, S=Stop, L=Loop, R = Reset, Q = Quit,N = NextSong,O = previousSong");
                 System.out.print("Enter your choice: ");
 
-                response = scanner.next();
-                response = response.toUpperCase();
+                res = scanner.next();
+                res = res.toUpperCase();
 
 
-                switch (response) {
+                switch (res) {
                     case ("P"): {
                         clip.start();
                         long clip_position = clip.getMicrosecondPosition();
@@ -83,8 +83,8 @@ public class Play {
 
                     default:
                         System.err.println("PLEASE SELECT THE CORRECT OPTION");
-                        response = scanner.next();
-                        response = response.toUpperCase();
+                        res = scanner.next();
+                        res = res.toUpperCase();
                 }
             }
         } catch (Exception e) {
