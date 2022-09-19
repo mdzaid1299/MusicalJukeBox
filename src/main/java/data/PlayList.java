@@ -1,6 +1,5 @@
 package data;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +8,10 @@ import java.util.Scanner;
 import Connection.ConnectioningDB;
 import Main.Implementation;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
 public class PlayList {
     Scanner sc = new Scanner(System.in);
     String[] arg = new String[0];
-    PlayListDetail playListDetail = new PlayListDetail();
+    Play play = new Play();
 
     public void createAPlayList() throws Exception {
         Scanner sc = new Scanner(System.in);
@@ -54,7 +50,7 @@ public class PlayList {
         Connection connection = ConnectioningDB.getConnection();
         Scanner scanner = new Scanner(System.in);
         JukeBoxOperation jukeOperation = new JukeBoxOperation();
-        PlayListDetail playSong = new PlayListDetail();
+        Play playSong = new Play();
         String sql = "SELECT playlist_id,playlist_name from playlist_detail;";
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
@@ -110,10 +106,10 @@ public class PlayList {
                 scanner.nextLine();
                 String songName = scanner.nextLine();
                 List<Songs> songsListBasedOnName = jukeOperation.searchBySongName(songName);
-                System.out.format("%-10s %-30s %-30s %-30s %-30s %-30s \n", "SongID", "SongName", "Artist", "Duration", "GenreType");
+                System.out.format("%-10s %-30s %-30s %-30s %-30s \n", "SongID", "SongName", "Artist", "Duration", "GenreType");
                 System.out.println("-----------------------------------------------------------------------------------------");
                 for (Songs songs : songsListBasedOnName) {
-                    System.out.format("%-10s %-30s %-30s %-30s %-30s %-30s \n", songs.getSongId(), songs.getSongsName(), songs.getArtist(), songs.getDuration(), songs.getGenre());
+                    System.out.format("%-10s %-30s %-30s %-30s %-30s \n", songs.getSongId(), songs.getSongsName(), songs.getArtist(), songs.getDuration(), songs.getGenre());
                 }
                 break;
             case (5):
@@ -159,7 +155,7 @@ public class PlayList {
                     int select = scanner.nextInt();
                     switch (select) {
                         case (1):
-                            playListDetail.PlaySong(playList);
+                            play.playAllSongs(playList);
                             break;
                         case (2):
                             String[] arg = new String[0];
@@ -195,12 +191,12 @@ public class PlayList {
         System.out.println(" Please enter the playListID you want to open");
 
         int playListID = scanner.nextInt();
-        String sql = "Select songId from playlist where playlistId = ?";
+        String sql = "Select song_id from playlist where playlist_id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, playListID);
 
         ResultSet resultSet1 = preparedStatement.executeQuery();
-        String sql3 = "Select * from songs where songId = ?";
+        String sql3 = "Select * from songs where song_id = ?";
         while (resultSet1.next()) {
             int songId = resultSet1.getInt(1);
             PreparedStatement preparedStatement1 = connection.prepareStatement(sql3);
@@ -227,12 +223,12 @@ public class PlayList {
         }
         System.out.println("Enter play list id");
         int id = sc.nextInt();
-        String sql1 = "Select songId from playlist where playlistId = ?";
+        String sql1 = "Select song_id from playlist where playlist_id = ?";
         preparedStatement.setInt(1, id);
         ResultSet resultSet1 = preparedStatement.executeQuery();
         while (resultSet1.next()) {
             int songId = resultSet1.getInt(2);
-            String sql2 = "Select * from songs where songId = ?";
+            String sql2 = "Select * from songs where song_id = ?";
             PreparedStatement preparedStatement1 = connection.prepareStatement(sql2);
             preparedStatement1.setInt(1, songId);
             ResultSet resultSet2 = preparedStatement1.executeQuery();

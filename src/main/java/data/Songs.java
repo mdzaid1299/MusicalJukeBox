@@ -15,7 +15,8 @@ public class Songs {
     private String genre;
     private String filepath;
 
-    public Songs() {}
+    public Songs() {
+    }
 
     public Songs(int songId, String songsName, String artist, String duration, String genre, String filepath) {
         this.songId = songId;
@@ -76,23 +77,17 @@ public class Songs {
 
     @Override
     public String toString() {
-        return "Songs{" +
-                "songId=" + songId +
-                ", songsName='" + songsName + '\'' +
-                ", artist='" + artist + '\'' +
-                ", duration='" + duration + '\'' +
-                ", genre='" + genre + '\'' +
-                ", filepath='" + filepath + '\'' +
-                '}';
+        return "Songs{" + "songId=" + songId + ", songsName='" + songsName + '\'' + ", artist='" + artist + '\'' + ", duration='" + duration + '\'' + ", genre='" + genre + '\'' + ", filepath='" + filepath + '\'' + '}';
     }
+
     public String returnPath(int songId) throws SQLException, ClassNotFoundException {
         String path = "";
         Connection connection = ConnectioningDB.getConnection();
-        String query = "Select trackPath from songs where songId = ?";
+        String query = "Select filepath from songs where song_id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setInt(1,songId);
+        preparedStatement.setInt(1, songId);
         ResultSet resultSet = preparedStatement.executeQuery();
-        while(resultSet.next()){
+        while (resultSet.next()) {
             path = resultSet.getString(1);
         }
         return path;
