@@ -1,16 +1,14 @@
 package Main;
 
-import data.*;
-
+import data.JukeBoxOperation;
+import data.Play;
+import data.PlayList;
+import data.Songs;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,12 +22,6 @@ public class Implementation {
         JukeBoxOperation jukeBoxOperation = new JukeBoxOperation();
 
         System.out.println("--------------------------------------------Welcome to Jukebox-----------------------------------------------");
-        //  System.out.println("                                      Songs Table");
-      //  System.out.println("--------------------------------------------------------------------------------------------------------");
-//        System.out.format("%-10s %-30s %-30s %-30s %-30s \n", "SongID", "SongName", "Artist", "Duration", "GenreType");
-//        System.out.println("======================================================================================================");
-//        List<Songs> songsList = jukeBoxOperation.displaySongs();
-
         int opt = 0;
         while (opt != 3) {
             System.out.println("============================================================================================");
@@ -50,12 +42,9 @@ public class Implementation {
                         switch (option) {
 
                             case (1):
-                               System.out.format("%-10s %-30s %-30s %-30s %-30s \n", "SongID", "SongName", "Artist", "Duration", "GenreType");
+                                System.out.format("%-10s %-30s %-30s %-30s %-30s \n", "SongID", "SongName", "Artist", "Duration", "GenreType");
                                 List<Songs> allSongs = jukeBoxOperation.displaySongs();
-//                                System.out.println("-----------------------------------------------------------------------------------------");
-//                                for (Songs songs : allSongs) {
-//                                    System.out.format("%-10s %-30s %-30s %-30s %-30s \n", songs.getSongId(), songs.getSongsName(), songs.getArtist(), songs.getDuration(), songs.getGenre());
-//                                }
+
                                 System.out.println("PLEASE SELECT THE OPTION \n1:To  play a song \n2: Go to your playlistt\n3: Go back to the main menu");
                                 int choice = scanner.nextInt();
 
@@ -158,7 +147,6 @@ public class Implementation {
 
                             default:
                                 System.err.println("PLEASE SELECT THE RIGHT OPTION");
-                                //option = scanner.nextInt();
                         }
                         break;
 
