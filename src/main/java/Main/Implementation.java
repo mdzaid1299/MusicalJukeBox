@@ -21,7 +21,7 @@ public class Implementation {
         PlayList playListObj = new PlayList();
         JukeBoxOperation jukeBoxOperation = new JukeBoxOperation();
 
-        System.out.println("-------------------------------------Welcome to Jukebox-------------------------------------");
+        System.out.println("********************************* Welcome to Musical Jukebox *********************************");
         int opt = 0;
         while (opt != 3) {
             System.out.println("============================================================================================");
@@ -158,9 +158,9 @@ public class Implementation {
                             System.out.format("%-10s %-30s %-30s %-30s %-30s \n", songs.getSongId(), songs.getSongsName(), songs.getArtist(), songs.getDuration(), songs.getGenre());
                         }
                         System.out.println("-----------------------------------------------------------------------------------------");
-                        System.out.println("1: DO YOU WANT TO PLAY THE ENTIRE PLAYLIST");
-                        System.out.println("2: DO YOU WANT TO PLAY A SONG FROM PLAYLIST \n 3. DO YOU WANT TO ADD SONG INTO EXISTING PLAYLIST");
-                        System.out.println("3: GO BACK TO MAIN MENU");
+                        System.out.println("1: PLAY THE ENTIRE PLAYLIST");
+                        System.out.println("2: PLAY A SONG FROM PLAYLIST \n3: ADD SONG INTO EXISTING PLAYLIST");
+                        System.out.println("4: GO BACK TO MAIN MENU");
                         int select = scanner.nextInt();
                         switch (select) {
                             case (1):

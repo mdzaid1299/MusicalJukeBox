@@ -1,5 +1,7 @@
 package data;
 
+import Main.Implementation;
+
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +37,7 @@ public class Play {
             String res = "";
 
             while (!res.equals("Q")) {
-                System.out.println("P = play, T= Pause, S=Stop, L=Loop, R = Reset, Q = Quit,N = NextSong,O = previousSong");
+                System.out.println("P = play, T= Pause, S=Stop, L=Loop, R = Reset, Q = Quit,N = NextSong,O = previousSong , E = Exit");
                 System.out.print("Enter your choice: ");
 
                 res = scanner.next();
@@ -45,12 +47,10 @@ public class Play {
                 switch (res) {
                     case ("P"): {
                         clip.start();
-                        long clip_position = clip.getMicrosecondPosition();
                         break;
                     }
                     case ("T"): {
                         clip.stop();
-                        long clip_position = clip.getMicrosecondPosition();
                         break;
                     }
                     case ("S"): {
@@ -79,6 +79,9 @@ public class Play {
                         songIndex -= 1;
                         clip.close();
                         playAllSongs(songslist.get(songIndex).getFilepath());
+                    case ("E"):
+                        String[] arg = new String[0];
+                        Implementation.main(arg);
                         break;
 
                     default:

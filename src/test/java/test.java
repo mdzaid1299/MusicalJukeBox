@@ -1,4 +1,3 @@
-import static org.junit.jupiter.api.Assertions.*;
 import data.JukeBoxOperation;
 import data.Play;
 import data.PlayList;
@@ -9,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class JukeBoxTestTest {
     JukeBoxOperation jukeBoxOperation;

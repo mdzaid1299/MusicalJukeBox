@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PlayList {
-    Scanner sc = new Scanner(System.in);
-    String[] arg = new String[0];
     Play play = new Play();
 
     public void createAPlayList() throws Exception {
@@ -19,16 +17,12 @@ public class PlayList {
         System.out.println("Enter the name of playlist");
         String playlistName = sc.nextLine();
         String sql = "Insert into playlist_detail(playlist_name) values (?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setString(1, playlistName);
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, playlistName); //setting playl name
         int count = preparedStatement.executeUpdate();
-        int generatedId = 0;
+
         if (count != 0) {
             System.out.println("New PlayList Created");
-            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                generatedId = generatedKeys.getInt(1);
-            }
         }
         System.out.println("1: DO YOU WANT TO ADD SONGS TO PLAY LIST");
         System.out.println("2: GO BACK TO MAIN MENU");
@@ -50,16 +44,15 @@ public class PlayList {
         Connection connection = ConnectioningDB.getConnection();
         Scanner scanner = new Scanner(System.in);
         JukeBoxOperation jukeOperation = new JukeBoxOperation();
-        Play playSong = new Play();
         String sql = "SELECT playlist_id,playlist_name from playlist_detail;";
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         while (resultSet.next()) {
-            System.out.println("playListID = " + resultSet.getInt(1));
-            System.out.println("playListName = " + resultSet.getString(2));
+            System.out.println("PlayList ID = " + resultSet.getInt(1));
+            System.out.println("PlayList Name = " + resultSet.getString(2));
         }
 
-        System.out.println("Please enter the playListID to add songs");
+        System.out.println("Please enter the playList ID to add songs");
         int playListID = scanner.nextInt();
 
         System.out.println("Search song based on following option");
@@ -79,10 +72,10 @@ public class PlayList {
 
                 break;
             case (2):
-                System.out.println("PLEASE ENTER THE ARTIST NAME YOU WANT TO SEARCH");
+                System.out.println("ENTER THE ARTIST NAME YOU WANT TO SEARCH");
                 scanner.nextLine();
                 String artistName = scanner.nextLine();
-                List<Songs> songsListOfArtist = jukeOperation.searchByArtist(artistName);
+                List<Songs> songsListOfArtist = jukeOperation.searchByArtist(artistName); //
                 System.out.format("%-10s %-30s %-30s %-30s %-30s  \n", "SongID", "SongName", "Artist", "Duration", "GenreType");
                 System.out.println("-----------------------------------------------------------------------------------------");
                 for (Songs songs : songsListOfArtist) {
@@ -90,7 +83,7 @@ public class PlayList {
                 }
                 break;
             case (3):
-                System.out.println("PLEASE ENTER THE GENRE TYPE YOU WANT TO SEARCH");
+                System.out.println("ENTER THE GENRE TYPE YOU WANT TO SEARCH");
                 String genreType = scanner.nextLine();
                 List<Songs> songsList = jukeOperation.searchByGenre(genreType);
                 System.out.format("%-10s %-30s %-30s %-30s %-30s \n", "SongID", "SongName", "Artist", "Duration", "GenreType");
@@ -100,7 +93,7 @@ public class PlayList {
                 }
                 break;
             case (4):
-                System.out.println("PLEASE ENTER THE SONG NAME YOU WANT TO SEARCH");
+                System.out.println("ENTER THE SONG NAME YOU WANT TO SEARCH");
                 scanner.nextLine();
                 String songName = scanner.nextLine();
                 List<Songs> songsListBasedOnName = jukeOperation.searchBySongName(songName);
@@ -120,7 +113,7 @@ public class PlayList {
                 option = scanner.nextInt();
         }
 
-        System.out.println("Please enter the songID you want to add to the playlist");
+        System.out.println("Please enter the song_id you want to add to the playlist_id");
         int songID = scanner.nextInt();
 
         String sqlUpdate = "INSERT INTO playlist(playlist_id,song_id) values(?,?);";

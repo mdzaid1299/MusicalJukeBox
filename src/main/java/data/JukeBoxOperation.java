@@ -23,16 +23,16 @@ public class JukeBoxOperation {
         ResultSet resultSet = ps.executeQuery();
         while (resultSet.next()) {
 
-            Songs songData = new Songs(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
+            Songs data = new Songs(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
 
-            songData.setSongId(resultSet.getInt(1));
-            songData.setSongsName(resultSet.getString(2));
-            songData.setArtist(resultSet.getString(3));
-            songData.setDuration(resultSet.getString(4));
-            songData.setGenre(resultSet.getString(5));
-            songData.setFilepath(resultSet.getString(6));
+            data.setSongId(resultSet.getInt(1));
+            data.setSongsName(resultSet.getString(2));
+            data.setArtist(resultSet.getString(3));
+            data.setDuration(resultSet.getString(4));
+            data.setGenre(resultSet.getString(5));
+            data.setFilepath(resultSet.getString(6));
 
-            songList.add(songData);
+            songList.add(data);
         }
         for (Songs songs : songList) {
             System.out.format("%-10s %-30s %-30s %-30s %-30s \n", songs.getSongId(), songs.getSongsName(), songs.getArtist(), songs.getDuration(), songs.getGenre());
@@ -107,15 +107,15 @@ public class JukeBoxOperation {
                     case (1):
                         playList.createAPlayList();
                     case (2):
-                        List<Songs> playList1 = playList.existingPlaylist ();
-                        System.out.format("%-10s %-30s %-30s %-30s %-30s \n", "SongID", "SongName", "Artist", "Duration", "GenreType");
+                        List<Songs> playList1 = playList.existingPlaylist();
+                        System.out.format("%-10s %-30s %-30s %-30s %-30s \n", "SongID", "SongName", "Artist", "Duration", "Genre");
                         System.out.println("-----------------------------------------------------------------------------------------");
                         for (Songs s : playList1) {
                             System.out.format("%-10s %-30s %-30s %-30s %-30s \n", s.getSongId(), s.getSongsName(), s.getArtist(), s.getDuration(), s.getGenre());
                         }
                         System.out.println("-----------------------------------------------------------------------------------------");
-                        System.out.println("\t\t1: DO YOU WANT TO PLAY THE ENTIRE PLAYLIST");
-                        System.out.println("\t\t2: DO YOU WANT TO PLAY A SONG FROM PLAYLIST");
+                        System.out.println("\t\t1: PLAY THE ENTIRE PLAYLIST");
+                        System.out.println("\t\t2: PLAY A SONG FROM PLAYLIST");
                         System.out.println("\t\t3: GO BACK TO MAIN MENU");
                         int select = scanner.nextInt();
                         switch (select) {
@@ -123,7 +123,7 @@ public class JukeBoxOperation {
                                 playSong.playAllSongs(playList1);
                                 break;
                             case (2):
-                                System.out.format("%-10s %-30s %-30s %-30s %-30s \n", "SongID", "SongName", "Artist", "Duration", "GenreType");
+                                System.out.format("%-10s %-30s %-30s %-30s %-30s \n", "SongID", "SongName", "Artist", "Duration", "Genre");
                                 System.out.println("-----------------------------------------------------------------------------------------");
                                 for (Songs s2 : displaySongs()) {
                                     System.out.format("%-10s %-30s %-30s %-30s %-30s\n", s2.getSongId(), s2.getSongsName(), s2.getArtist(), s2.getDuration(), s2.getGenre());
@@ -140,7 +140,8 @@ public class JukeBoxOperation {
                                 System.err.println("PLEASE SELECT THE CORRECT OPTION");
                         }
 
-                } break;
+                }
+                break;
             case (3):
                 break;
             default:

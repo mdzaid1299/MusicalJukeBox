@@ -75,12 +75,8 @@ public class Songs {
         this.filepath = filepath;
     }
 
-    @Override
-    public String toString() {
-        return "Songs{" + "songId=" + songId + ", songsName='" + songsName + '\'' + ", artist='" + artist + '\'' + ", duration='" + duration + '\'' + ", genre='" + genre + '\'' + ", filepath='" + filepath + '\'' + '}';
-    }
 
-    public String returnPath(int songId) throws SQLException, ClassNotFoundException {
+    public String returnPath(int songId) throws SQLException, ClassNotFoundException { // returning path &
         String path = "";
         Connection connection = ConnectioningDB.getConnection();
         String query = "Select filepath from songs where song_id = ?";
