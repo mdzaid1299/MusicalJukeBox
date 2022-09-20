@@ -72,12 +72,10 @@ public class PlayList {
 
             case (1):
 
-                List<Songs> allSongs = jukeOperation.displaySongs();
                 System.out.format("%-10s %-30s %-30s %-30s %-30s  \n", "SongID", "SongName", "Artist", "Duration", "GenreType");
-                System.out.println("-----------------------------------------------------------------------------------------");
-                for (Songs songs : allSongs) {
-                    System.out.format("%-10s %-30s %-30s %-30s %-30s  \n", songs.getSongId(), songs.getSongsName(), songs.getArtist(), songs.getDuration(), songs.getGenre());
-                }
+                System.out.println("------------------------------------------------------------------------------------------------------------------");
+                List<Songs> allSongs = jukeOperation.displaySongs();
+
 
                 break;
             case (2):
@@ -145,11 +143,11 @@ public class PlayList {
                 case (2):
                     List<Songs> playList = existingPlaylist();
                     System.out.format("%-10s %-30s %-30s %-30s %-30s  \n", "SongID", "SongName", "Artist", "Duration", "GenreType");
-                    System.out.println("-----------------------------------------------------------------------------------------");
+                    System.out.println("-----------------------------------------------------------------------------------------------------------------");
                     for (Songs songs : playList) {
                         System.out.format("%-10s %-30s %-30s %-30s %-30s \n", songs.getSongId(), songs.getSongsName(), songs.getArtist(), songs.getDuration(), songs.getGenre());
                     }
-                    System.out.println("-----------------------------------------------------------------------------------------");
+                    System.out.println("-----------------------------------------------------------------------------------------------------------------");
                     System.out.println("\t\t1: DO YOU WANT TO PLAY THE PLAYLIST");
                     System.out.println("\t\t2: GO BACK TO MAIN MENU");
                     int select = scanner.nextInt();
@@ -208,34 +206,5 @@ public class PlayList {
         }
         return playListSongs;
     }
-
-    public List<Songs> displayPlayList() throws SQLException, ClassNotFoundException {
-        List<Songs> newPl = new ArrayList<>();
-        Connection connection = ConnectioningDB.getConnection();
-        String sql = "select * from playlist_detail";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        while (resultSet.next()) {
-            System.out.println("Playlist id " + resultSet.getInt(1));
-            System.out.println("play list name " + resultSet.getString(2));
-        }
-        System.out.println("Enter play list id");
-        int id = sc.nextInt();
-        String sql1 = "Select song_id from playlist where playlist_id = ?";
-        preparedStatement.setInt(1, id);
-        ResultSet resultSet1 = preparedStatement.executeQuery();
-        while (resultSet1.next()) {
-            int songId = resultSet1.getInt(2);
-            String sql2 = "Select * from songs where song_id = ?";
-            PreparedStatement preparedStatement1 = connection.prepareStatement(sql2);
-            preparedStatement1.setInt(1, songId);
-            ResultSet resultSet2 = preparedStatement1.executeQuery();
-            while (resultSet2.next()) {
-                newPl.add(new Songs(resultSet2.getInt(1), resultSet2.getString(2), resultSet2.getString(3), resultSet2.getString(4), resultSet2.getString(5), resultSet2.getString(6)));
-            }
-        }
-        return newPl;
-    }
 }
+

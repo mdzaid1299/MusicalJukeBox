@@ -21,4 +21,4 @@ insert into songs value ( 800 , "Shyad" , "Arijit" , "6.21"  , "Romantic", "src/
 insert into songs value ( 900 , "Tere Naam" , "Udit Narayan" , "2.25"  , "Romantic", "src/main/resources/Tere Naam - Tere Naam 128 Kbps.wav");
 insert into songs value ( 1000 , "Bailamos" , "Enrique Iglesias" , "3.25" , "Pop", "src/main/resources/Enrique Iglesias - Bailamos.wav");
 
-drop database jukebox;
+drop database MusicalJukeboxts;
