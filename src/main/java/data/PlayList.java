@@ -67,8 +67,7 @@ public class PlayList {
 
                 System.out.format("%-10s %-30s %-30s %-30s %-30s  \n", "SongID", "SongName", "Artist", "Duration", "GenreType");
                 System.out.println("------------------------------------------------------------------------------------------------------------------");
-                List<Songs> allSongs = jukeOperation.displaySongs();
-
+                jukeOperation.displaySongs();
 
                 break;
             case (2):
